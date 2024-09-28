@@ -34,7 +34,6 @@ jobs:
       - name: Run new Docker container
         run: docker run -d -p 80:3001 --name easy-backend-container \
           --env NODE_ENV=production \
-          --env MONGO_URI=${{ secrets.MONGO_URI }} \
           --env MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }} \
           --env JWT_SECRET=${{ secrets.JWT_SECRET }} \
           gablugap/easy-backend:latest
