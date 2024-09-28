@@ -12,7 +12,8 @@ async function bootstrap() {
 
   // Enable CORS
   app.enableCors({
-    origin: 'http://localhost:3000', 
+    //origin: 'http://localhost:3000', 
+    origin: 'http://mygablubacket.s3-website-ap-southeast-2.amazonaws.com',
     // Adjust based on your front-end URL
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
