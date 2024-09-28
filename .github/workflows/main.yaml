@@ -37,4 +37,4 @@ jobs:
           --env MONGO_URI=${{ secrets.MONGO_URI }} \
           --env MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }} \
           --env JWT_SECRET=${{ secrets.JWT_SECRET }} \
-          rahulvikhe/nestjs-app:latest
+          gablugap/easy-backend:latest
