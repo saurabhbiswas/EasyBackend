@@ -1,0 +1,40 @@
+name: Deploy NestJS Application
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        
+      - name: Login to Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build Docker image
+        run: docker build -t saurabhbiswas/EasyBackend .
+
+      - name: Publish Docker image to Docker Hub
+        run: docker push saurabhbiswas/EasyBackend:latest
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull Docker image from Docker Hub
+        run: docker pull saurabhbiswas/EasyBackend:latest
+
+      - name: Delete old Docker container (if exists)
+        run: docker rm -f nestjs-app-container || true  # Won't fail if the container doesn't exist
+
+      - name: Run new Docker container
+        run: docker run -d -p 80:3001 --name nestjs-app-container \
+          --env NODE_ENV=production \
+          --env MONGO_URI=${{ secrets.MONGO_URI }} \
+          --env MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }} \
+          --env JWT_SECRET=${{ secrets.JWT_SECRET }} \
+          rahulvikhe/nestjs-app:latest
