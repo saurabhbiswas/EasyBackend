@@ -16,17 +16,17 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build -t saurabhbiswas/EasyBackend .
+        run: docker build -t saurabhbiswas/easybackend .
 
       - name: Publish Docker image to Docker Hub
-        run: docker push saurabhbiswas/EasyBackend:latest
+        run: docker push saurabhbiswas/easybackend:latest
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Pull Docker image from Docker Hub
-        run: docker pull saurabhbiswas/EasyBackend:latest
+        run: docker pull saurabhbiswas/easybackend:latest
 
       - name: Delete old Docker container (if exists)
         run: docker rm -f nestjs-app-container || true  # Won't fail if the container doesn't exist
