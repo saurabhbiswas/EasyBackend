@@ -32,7 +32,7 @@ jobs:
         run: docker stop gablugap-easy-backend-container || true
 
       - name: Delete old Docker container (if exists)
-        run: docker rm gablugap-easy-backend-container || true
+        run: docker rm -f gablugap-easy-backend-container || true
 
       - name: Run new Docker container
         run: docker run --rm --pull always -d -p 80:3001 --name gablugap-easy-backend-container gablugap/easy-backend:latest
