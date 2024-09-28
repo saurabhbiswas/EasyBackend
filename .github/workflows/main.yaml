@@ -16,23 +16,23 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build -t saurabhbiswas/easybackend .
+        run: docker build -t gablugap/easy-backend .
 
       - name: Publish Docker image to Docker Hub
-        run: docker push saurabhbiswas/easybackend:latest
+        run: docker push gablugap/easy-backend:latest
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Pull Docker image from Docker Hub
-        run: docker pull saurabhbiswas/easybackend:latest
+        run: docker pull gablugap/easy-backend:latest
 
       - name: Delete old Docker container (if exists)
-        run: docker rm -f nestjs-app-container || true  # Won't fail if the container doesn't exist
+        run: docker rm -f easy-backend-container || true  # Won't fail if the container doesn't exist
 
       - name: Run new Docker container
-        run: docker run -d -p 80:3001 --name nestjs-app-container \
+        run: docker run -d -p 80:3001 --name easy-backend-container \
           --env NODE_ENV=production \
           --env MONGO_URI=${{ secrets.MONGO_URI }} \
           --env MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }} \
