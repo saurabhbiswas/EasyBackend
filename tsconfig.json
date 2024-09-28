@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    /* Basic Options */
+    "module": "commonjs",                       // NestJS uses CommonJS module system
+    "declaration": true,                        // Generates corresponding '.d.ts' files
+    "removeComments": true,                     // Remove comments from output
+    "emitDecoratorMetadata": true,              // Emit design-type metadata for decorated declarations
+    "experimentalDecorators": true,             // Enable experimental support for decorators
+    "allowSyntheticDefaultImports": true,       // Allow default imports from modules with no default export
+    "target": "es2017",                         // Specify ECMAScript target version
+    "sourceMap": true,                          // Generates corresponding '.map' files
+    "outDir": "./dist",                         // Redirect output structure to the 'dist' directory
+    "baseUrl": "./",                            // Base directory to resolve non-relative module names
+    "incremental": true,                        // Enable incremental compilation
+    "strict": true,                             // Enable all strict type-checking options
+
+    /* Module Resolution Options */
+    "moduleResolution": "node",                 // Use Node.js module resolution
+    "esModuleInterop": true,                    // Enables compatibility with CommonJS modules
+    "resolveJsonModule": true,                  // Allow importing .json files
+
+    /* Lib Options */
+    "lib": ["es2017", "esnext.asynciterable"],  // Include necessary library files
+
+    /* Type Checking Options */
+    "skipLibCheck": true                        // Skip type checking of declaration files
+  },
+  "exclude": ["node_modules", "dist"],          // Exclude directories
+  "include": ["src/**/*"]                       // Include all TypeScript files in 'src' directory
+}
