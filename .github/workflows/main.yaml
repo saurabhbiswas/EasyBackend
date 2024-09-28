@@ -28,8 +28,11 @@ jobs:
       - name: Pull Docker image from Docker Hub
         run: docker pull gablugap/easy-backend:latest
 
+      - name: Stop old Docker container (if exists)
+        run: docker stop gablugap-easy-backend-container || true
+
       - name: Delete old Docker container (if exists)
-        run: docker rm -f easy-backend-container || true  # Won't fail if the container doesn't exist
+        run: docker rm gablugap-easy-backend-container || true
 
       - name: Run new Docker container
-        run: docker run --pull always -d -p 80:3001 --name easy-backend-container --env NODE_ENV=production --env MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }} --env JWT_SECRET=${{ secrets.JWT_SECRET }} gablugap/easy-backend:latest
+        run: docker run --rm --pull always -d -p 80:3001 --name gablugap-easy-backend-container gablugap/easy-backend:latest
