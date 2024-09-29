@@ -30,6 +30,10 @@ COPY --from=builder /app/package*.json ./
 # Copy .env file if you want to include it in the container
 # COPY .env ./
 
+# Set NODE_ENV to production
+ENV NODE_ENV=production
+
+
 # Expose the application port (default for NestJS apps)
 EXPOSE 3001
 
