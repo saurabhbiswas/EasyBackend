@@ -14,7 +14,7 @@ Use only http as for https ,we need custom domain purcahse and SSL.[Future consi
 
 Node.js v22.9.0 should be installed
 
-To test with front end ,Refer, https://github.com/saurabhbiswas/Easy-FrontEnd/blob/main/README.md
+To test with Front End ,For installation Refer, https://github.com/saurabhbiswas/Easy-FrontEnd/blob/main/README.md
 
 
 
@@ -22,18 +22,23 @@ Install mogodb(local/cloud hoisted) and it should be running.
 
 
 
-To install mogodb locall refer below docs
+To install mogodb locally, refer  doc
+
 https://www.mongodb.com/docs/manual/installation/
 
 MongoDB Atlas Cloud instance
+
 https://www.mongodb.com/products/platform/atlas-database?tck=docs_server
 
 
 ## ENV FILE 
 
 In .env.development file,
+
 1) Point to correct FRONTEND_URL to avoid CORS error
+
 2) MONGODB_URI should be point to local /cloud hoisted mongodb instance
+
 3) JWT_SECRET should be alteast 8 character long
 
 PORT=3001
