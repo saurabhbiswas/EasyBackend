@@ -76,6 +76,10 @@ In .env.development file,
 
 3) JWT_SECRET should be alteast 8 character long
 
+4) PORT at which nestjs app runs
+
+
+
 PORT=3001
 
 FRONTEND_URL=http://localhost:3000
@@ -84,6 +88,7 @@ JWT_SECRET=your_jwt_secret_key
 
 MONGODB_URI=mongodb://localhost:27017/your_db
 
+Note:- Ensure nestjs app IP address is whitelsited in mongodb (local/cloud) setup.
 
 ## Install dependencies
 
