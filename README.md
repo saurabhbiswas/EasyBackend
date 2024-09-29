@@ -105,9 +105,7 @@ It runs the app at  http://localhost:3001
 
 Swagger docs available at http://localhost:3001/api
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.
 
 
 
