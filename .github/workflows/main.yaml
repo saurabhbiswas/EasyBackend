@@ -48,9 +48,17 @@ jobs:
       - name: Remove old Docker image (if exists)
         run: docker rmi gablugap/easy-backend:latest || true
 
-      # Step 6: Run new Docker container with the latest image
-      - name: Run new Docker container
-        run: docker run --rm --pull always -d -p 80:3001 --name gablugap-easy-backend-container gablugap/easy-backend:latest
+      # Step 6: Run new Docker container with the latest image and environment variables
+      - name: Run new Docker container with environment variables
+        run: |
+          docker run --rm -d \
+            -p 80:3001 \
+            --name gablugap-easy-backend-container \
+            -e PORT=${{ secrets.PORT }} \
+            -e FRONTEND_URL=${{ secrets.FRONTEND_URL }} \
+            -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
+            -e MONGODB_URI=${{ secrets.MONGODB_URI }} \
+            gablugap/easy-backend:latest
 
       # Step 7: List running containers to verify if the new container is up
       - name: List running Docker containers
