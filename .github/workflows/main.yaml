@@ -51,8 +51,7 @@ jobs:
       # Step 6: Run new Docker container with the latest image and environment variables
       - name: Run new Docker container with environment variables
         run: |
-          docker run --rm -d \
-            -p 80:3001 \
+          docker run --rm --pull always -d -p 80:3001 \
             --name gablugap-easy-backend-container \
             -e PORT=${{ secrets.PORT }} \
             -e FRONTEND_URL=${{ secrets.FRONTEND_URL }} \
