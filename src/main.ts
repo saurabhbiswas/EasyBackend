@@ -31,8 +31,12 @@ async function bootstrap() {
     credentials: true,
   });
 
-  // Use Global Validation Pipe for DTO validation
-  app.useGlobalPipes(new ValidationPipe());
+  // Enable global validation
+  app.useGlobalPipes(new ValidationPipe({
+    whitelist: true, // Automatically remove properties that are not in the DTO
+    forbidNonWhitelisted: true, // Throw an error when extra properties are passed
+    transform: true, // Automatically transform payloads to match DTOs
+  }));
 
   // Start the application on the specified port
   await app.listen(port);
