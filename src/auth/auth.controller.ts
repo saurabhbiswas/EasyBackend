@@ -6,7 +6,9 @@ import { Response } from 'express';
 import { LoginDto } from './dto/login.dto';
 import { SignupDto } from './dto/signup.dto';
 import { RefreshDto } from './dto/refresh.dto';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 
+@ApiTags('Authentication') // Groups endpoints under "Authentication" tag
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -14,7 +16,28 @@ export class AuthController {
     private userService: UserService
   ) {}
 
-  @Post('login')
+   @Post('login')
+  @ApiOperation({ summary: 'User login' })
+  @ApiResponse({
+    status: 200,
+    description: 'Successful login',
+    schema: {
+      example: {
+        accessToken: 'jwt-access-token',
+        refreshToken: 'jwt-refresh-token',
+      },
+    },
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Invalid credentials',
+    schema: {
+      example: {
+        message: 'Invalid credentials',
+      },
+    },
+  })
+ 
   async login(@Body() body: LoginDto, @Res() res: Response) {
     const { email, password } = body;
     const user = await this.userService.findByEmail(email);
@@ -31,7 +54,27 @@ export class AuthController {
     return res.status(HttpStatus.OK).json(tokens);
   }
 
+
   @Post('signup')
+  @ApiOperation({ summary: 'User signup' })
+  @ApiResponse({
+    status: 201,
+    description: 'User registered successfully',
+    schema: {
+      example: {
+        message: 'User registered successfully',
+      },
+    },
+  })
+  @ApiResponse({
+    status: 409,
+    description: 'User already exists',
+    schema: {
+      example: {
+        message: 'User already exists',
+      },
+    },
+  })
   async signup(@Body() body: SignupDto, @Res() res: Response) {
     const { email, password, name } = body;
     const existingUser = await this.userService.findByEmail(email);
