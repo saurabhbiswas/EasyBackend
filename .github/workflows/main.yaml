@@ -25,40 +25,27 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      # Step 1: List current images for debugging purposes
       - name: List current Docker images before pull
         run: docker images
 
       - name: Pull Docker image from Docker Hub
         run: docker pull gablugap/easy-backend:latest
 
-      # Step 2: List images after pulling to verify the new image
       - name: List Docker images after pull
         run: docker images
 
-      # Step 3: Stop old Docker container (if exists)
       - name: Stop old Docker container (if exists)
         run: docker stop gablugap-easy-backend-container || true
 
-      # Step 4: Remove old Docker container (if exists)
       - name: Delete old Docker container (if exists)
         run: docker rm -f gablugap-easy-backend-container || true
 
-      # Step 5: Remove old Docker image to avoid caching issues
       - name: Remove old Docker image (if exists)
         run: docker rmi gablugap/easy-backend:latest || true
 
-      # Step 6: Run new Docker container with the latest image and environment variables
       - name: Run new Docker container with environment variables
         run: |
-          docker run --rm --pull always -d -p 80:3001 \
-            --name gablugap-easy-backend-container \
-            -e PORT=${{ secrets.PORT }} \
-            -e FRONTEND_URL=${{ secrets.FRONTEND_URL }} \
-            -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
-            -e MONGODB_URI=${{ secrets.MONGODB_URI }} \
-            gablugap/easy-backend:latest
+          docker run --rm --pull always -d -p 80:3001 --name gablugap-easy-backend-container -e PORT=${{ secrets.PORT }} -e FRONTEND_URL=${{ secrets.FRONTEND_URL }} -e JWT_SECRET=${{ secrets.JWT_SECRET }} -e MONGODB_URI=${{ secrets.MONGODB_URI }} gablugap/easy-backend:latest
 
-      # Step 7: List running containers to verify if the new container is up
       - name: List running Docker containers
         run: docker ps
