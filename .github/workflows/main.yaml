@@ -44,8 +44,7 @@ jobs:
         run: docker rmi gablugap/easy-backend:latest || true
 
       - name: Run new Docker container with environment variables
-        run: |
-          docker run  -d -p 80:3001 --name gablugap-easy-backend-container -e PORT=${{ secrets.PORT }} -e FRONTEND_URL=${{ secrets.FRONTEND_URL }} -e JWT_SECRET=${{ secrets.JWT_SECRET }} -e MONGODB_URI=${{ secrets.MONGODB_URI }} gablugap/easy-backend:latest
+        run: docker run --rm -d -p 80:3001 --name gablugap-easy-backend-container gablugap/easy-backend:latest
 
       - name: List running Docker containers
         run: docker ps
