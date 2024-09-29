@@ -73,6 +73,8 @@ Launches the test runner in the interactive watch mode.
 
 ## Security Measures
 
+Security measures implemented -CORS, helmet, throttling implementation, refresh tokens.
+
 ### CI/CD pipeline 
 
 It is created.[.githhub/workflows/main.yml].
@@ -83,6 +85,7 @@ On each push to main,App is deployed in EC2 instance as docker image.
 Githhub Repository secret is used for deployment.
 
 ### Logger
+
 Logger is added 
 
 ### Swagger
